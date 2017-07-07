@@ -14,13 +14,17 @@
  */
 
 fieldset { 
-    width: 500px; 
+    width: 500px;
 }
 
 fieldset div { 
     clear: both;
     height: 30px;
     padding: 5px; 
+}
+
+fieldset div.textbox {
+    height: 210px;
 }
 
 label { 
@@ -37,6 +41,10 @@ label.note {
     float: left;
     width: 475px;
     clear: left;
+}
+
+label.wide {
+    width: 475px;
 }
 
 input { 

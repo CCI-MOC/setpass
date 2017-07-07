@@ -1,7 +1,8 @@
 [{username}]
-CSR Type: [Password Reset]
-Priority: [High]
+CSR Type: [{csr_type}]
+Queue: [{queue}]
 
 User's Full Name: {name}
 OpenStack username: {username}
-PIN: {pin}
+
+{content}

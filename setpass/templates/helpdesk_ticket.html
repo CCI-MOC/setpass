@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOC Help</title>
+    <link rel="stylesheet" type="text/css" href="static/setpass.css"> 
+</head>
+<body>
+
+<h1>Open an MOC Helpdesk Ticket</h1>
+
+<p>Please fill out the following form to open a helpdesk ticket.</p>  
+
+<form action="#" method="post">
+    <fieldset>
+        <div>
+            <label>Name:</label>
+            <input name="name"/>
+        </div>
+        <div>
+            <label>Email:</label><input name="email"/>
+            <label class="note">Email address must be associated with your OpenStack account.</label>
+        </div>
+        <div>
+            <label>Confirm email:</label>
+            <input name="confirm_email"/>
+        </div>
+        <div>
+            <label>Project name:</label>
+            <input name="project"/>
+        </div>
+        <div class="textbox">
+            <label class="wide">Describe your problem:</label>
+            <label class="note">Please be as specific as possible. Include names of VMs, networks, IPs, and error output where relevant.</label>
+            <textarea name="description" rows=10 cols=80></textarea>
+        </div>
+        <br>
+    </fieldset>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

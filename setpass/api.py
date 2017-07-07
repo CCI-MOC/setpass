@@ -190,7 +190,11 @@ def reset_password():
     if email != confirm_email:
         return Response(response="Email addresses do not match.", status=400)
 
-    _notify_helpdesk(name=name, username=email, pin=pin)
+    queue = CONF.helpdesk_queue
+    content = "PIN: {}".format(pin)
+
+    _notify_helpdesk(name=name, username=email, csr_type='Password Reset',
+                     queue=queue, content=content)
 
     return Response(response='The request has been forwarded to the helpdesk.',
                     status=200)
@@ -213,6 +217,38 @@ def _notify_helpdesk(**kwargs):
     server.starttls()
 
     server.sendmail(sender, recipient, msg.as_string())
+
+
+@wsgi.app.route('/help', methods=['GET'])
+def view_help_form():
+    return render_template('helpdesk_ticket.html')
+
+
+@wsgi.app.route('/help', methods=['POST'])
+def create_help_ticket():
+    name = request.form['name']
+    email = request.form['email']
+    confirm_email = request.form['confirm_email']
+    project = request.form['project']
+    description = request.form['description']
+
+    queue = CONF.internal_queue
+
+    if not name or not email or not project or not description:
+        return Response(response='Missing required field!', status=400)
+
+    if email != confirm_email:
+        return Response(response="Email addresses do not match.", status=400)
+
+    content = ("CLUSTER: {}\nPROJECT: {}\n"
+               "DESCRIPTION:\n{}").format(CONF.cluster, project,
+                                          description)
+
+    _notify_helpdesk(name=name, username=email, csr_type='General',
+                     queue=queue, content=content)
+
+    return Response(response='The request has been forwarded to the helpdesk.',
+                    status=200)
 
 
 if __name__ == '__main__':

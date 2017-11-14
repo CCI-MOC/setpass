@@ -56,6 +56,9 @@ def set_password():
     if password != confirm_password:
         return Response(response='Passwords do not match', status=400)
 
+    if len(pin) != 4 or not pin.isdigit():
+    	return Response(response='Pin should be 4-digit number', status=400)
+
     try:
         _set_password(token, pin, password)
     except exception.TokenNotFoundException:
@@ -189,6 +192,9 @@ def reset_password():
 
     if email != confirm_email:
         return Response(response="Email addresses do not match.", status=400)
+
+    if len(pin) != 4 or not pin.isdigit():
+    	return Response(response='Pin should be 4-digit number', status=400)
 
     _notify_helpdesk(name=name, username=email, pin=pin)
 

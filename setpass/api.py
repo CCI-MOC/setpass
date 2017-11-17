@@ -191,7 +191,7 @@ def reset_password():
         return Response(response="Email addresses do not match.", status=400)
 
     if len(pin) != 4 or not pin.isdigit():
-    	return Response(response='Pin should be 4-digit number', status=400)
+        return Response(response='Pin should be 4-digit number', status=400)
 
     _notify_helpdesk(name=name, username=email, pin=pin)
 
